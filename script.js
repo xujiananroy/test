@@ -1,5 +1,5 @@
 
-const GITHUB_TOKEN = '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';
+const GITHUB_TOKEN = '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';
 const REPO_OWNER = 'xujiananroy';
 const REPO_NAME = 'test';
 const FILE_PATH = 'test/db.json';
