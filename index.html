@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Global Clicker</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 20px;
+    }
+    #count {
+      font-size: 64px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌍 Global Clicker</h1>
+  <div id="count">--</div>
+  <button onclick="increment()">➕ CLICK ME</button>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // --- PASTE YOUR FIREBASE CONFIG HERE ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyCS5OQjVBo3pX846pun7l1urbYSZ6DGeZ8",
+        authDomain: "global-clicker-91805.firebaseapp.com",
+        databaseURL: "https://global-clicker-91805-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "global-clicker-91805",
+        storageBucket: "global-clicker-91805.firebasestorage.app",
+        messagingSenderId: "108764863015",
+        appId: "1:108764863015:web:00b83fa01ae18fb2458c02"
+    };
+
+    // Initialize
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const counterRef = db.ref("counter");
+
+    // Read in real-time
+    counterRef.on("value", (snapshot) => {
+      const count = snapshot.val() || 0;
+      document.getElementById("count").textContent = count;
+    });
+
+    // Write on click
+    function increment() {
+      counterRef.transaction((current) => {
+        return (current || 0) + 1;
+      });
+    }
+  </script>
+</body>
+</html>
